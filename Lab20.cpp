@@ -6,6 +6,14 @@
                 Make it have two parameters: number of legs, and an array of 3 doubles (the prices).
         3. In the third code block (starting at line 67), amend this such that the default constructors are used to populate these objects.
         4. Exercise your changes in main() with clear, easy-to-understand output.
+
+    Design decisions:
+        1. For the parameter constructor, I used an array pointer as the parameter for the price array, but a normal array pass by value or by const &
+                would work as well. I like the idea of passing by pointer or const & just in case the array is large. In this case it's only 3 values, but if it
+                were 3,000 then it might make some difference. I also passed the size of the array as well. I know the assignment only said 2 parameters,
+                but I'd like to make sure the array sizes match before copying data.
+            a. Because it's a pointer, I performed a deep copy because the assumption is the original array data in main will be deleted.
+        2. Added cout statements for each constructor section output, and added '$' for all of the price info.
 */
 
 #include <iostream>
@@ -33,7 +41,7 @@ public:
             prices[i] = getRandomPrice(); // Modified to add random prices for each array element
     }
     // I know the assignment said 2 parameters, but because an array has no bounds checking, I included the array size as a parameter.
-    Chair(int l, double *priceArray, int priceArraySize)
+    Chair(int l, const double *priceArray, int priceArraySize)
     {
         // Modified to accept array of prices and assign to object
         // Perform a deep copy in case pointer from main deletes array inside main
@@ -93,7 +101,7 @@ int main()
     cout << fixed << setprecision(2);
 
     // creating pointer to first chair object
-    cout << "> Using default no arg constructor to generate chair object:" << endl;
+    cout << "> Default no arg constructor to generate chair object:" << endl;
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
@@ -103,7 +111,7 @@ int main()
     chairPtr = nullptr;
 
     // creating dynamic chair object with constructor
-    cout << "> Using parameter constructor to generate chair object:" << endl;
+    cout << "> Parameter constructor to generate chair object:" << endl;
     prices[0] = 525.25;
     prices[1] = 434.34;
     prices[2] = 252.52;
@@ -115,7 +123,7 @@ int main()
 
     // Modify to use default constructors
     // creating dynamic array of chair objects
-    cout << "> Using default constructor to generate chair objects:" << endl;
+    cout << "> Default constructor to generate chair objects with array:" << endl;
     Chair *collection = new Chair[SIZE];
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
