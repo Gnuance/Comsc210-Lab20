@@ -14,70 +14,80 @@
 using namespace std;
 const int SIZE = 3;
 
-int getRandomLegs(); // Returns random number of 3 or 4 legs
+int getRandomLegs();     // Returns random number of 3 or 4 legs
 double getRandomPrice(); // Returns random price from 100.00 to 999.99
 
-class Chair {
+class Chair
+{
 private:
     int legs;
-    double * prices;
+    double *prices;
+
 public:
     // constructors
-    Chair() {
+    Chair()
+    {
         prices = new double[SIZE];
-        legs = 0;
+        legs = getRandomLegs(); // Modified to add random number of legs
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = getRandomPrice(); // Modified to add random prices for each array element
     }
-    Chair(int l) {
-        prices = new double[SIZE];
+    Chair(int l, double *priceArray, int priceArraySize)
+    {
+        if (priceArraySize = SIZE) prices = priceArray; // Modified to accept array of prices and assign to object
         legs = l;
-        for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
     }
 
     // setters and getters
-    void setLegs(int l)      { legs = l; }
-    int getLegs()            { return legs; }
+    void setLegs(int l) { legs = l; }
+    int getLegs() { return legs; }
 
-    void setPrices(double p1, double p2, double p3) { 
-        prices[0] = p1; prices[1] = p2; prices[2] = p3; 
+    void setPrices(double p1, double p2, double p3)
+    {
+        prices[0] = p1;
+        prices[1] = p2;
+        prices[2] = p3;
     }
 
-    double getAveragePrices() {
+    double getAveragePrices()
+    {
         double sum = 0;
         for (int i = 0; i < SIZE; i++)
             sum += prices[i];
         return sum / SIZE;
     }
 
-    void print() {
+    void print()
+    {
         cout << "CHAIR DATA - legs: " << legs << endl;
-        cout << "Price history: " ;
+        cout << "Price history: ";
         for (int i = 0; i < SIZE; i++)
             cout << prices[i] << " ";
-        cout << endl << "Historical avg price: " << getAveragePrices();
-        cout << endl << endl;
+        cout << endl
+             << "Historical avg price: " << getAveragePrices();
+        cout << endl
+             << endl;
     }
 };
 
-int main() {
+int main()
+{
     cout << fixed << setprecision(2);
 
-    //creating pointer to first chair object
+    // creating pointer to first chair object
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
 
-    //creating dynamic chair object with constructor
+    // creating dynamic chair object with constructor
     Chair *livingChair = new Chair(3);
     livingChair->setPrices(525.25, 434.34, 252.52);
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
 
-    //creating dynamic array of chair objects
+    // creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
     collection[0].setLegs(4);
     collection[0].setPrices(441.41, 552.52, 663.63);
@@ -87,16 +97,18 @@ int main() {
     collection[2].setPrices(626.26, 515.15, 757.57);
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
-    
+
     return 0;
 }
 
 // Returns random number of 3 or 4 legs
-int getRandomLegs(){
+int getRandomLegs()
+{
     return rand() % 2 + 3;
 }
 
 // Returns random price from 100.00 to 999.99
-double getRandomPrice(){
-    return (rand() % (99999-10000) + 10000) / 100;
+double getRandomPrice()
+{
+    return (rand() % (99999 - 10000 + 1) + 10000) / (double)100;
 }
