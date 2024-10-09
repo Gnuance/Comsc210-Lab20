@@ -1,3 +1,13 @@
+/*  Lab 20: Modifying chair maker
+    Objectives: Amend the code as follows:
+        1. Change the default constructor. Instead of it assigning null values, we want it to randomly select 3 or 4 legs,
+               and to randomly select prices (including dollars and cents) from $100.00 to $999.99.
+        2. Change the parameter constructor. Now it has just one parameter, the number of legs.
+                Make it have two parameters: number of legs, and an array of 3 doubles (the prices).
+        3. In the third code block (starting at line 67), amend this such that the default constructors are used to populate these objects.
+        4. Exercise your changes in main() with clear, easy-to-understand output.
+*/
+
 #include <iostream>
 #include <iomanip>
 
