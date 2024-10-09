@@ -101,6 +101,7 @@ int main()
     delete livingChair;
     livingChair = nullptr;
 
+    // Modify to use default constructors
     // creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
     collection[0].setLegs(4);
