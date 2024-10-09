@@ -88,7 +88,6 @@ int main()
 {
     // Price array to pass to parameter constructor
     double *prices = new double[SIZE];
- 
     cout << fixed << setprecision(2);
 
     // creating pointer to first chair object
@@ -101,9 +100,11 @@ int main()
     chairPtr = nullptr;
 
     // creating dynamic chair object with constructor
-    *prices = {525.25, 434.34, 252.52};
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
+    prices[0] = 525.25;
+    prices[1] = 434.34;
+    prices[2] = 252.52;
+    Chair *livingChair = new Chair(3, prices, SIZE);
+    // livingChair->setPrices(525.25, 434.34, 252.52); // No longer needed
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
@@ -119,6 +120,9 @@ int main()
     collection[2].setPrices(626.26, 515.15, 757.57);
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
+
+    // Clean up heap
+    delete[] prices;
 
     return 0;
 }
