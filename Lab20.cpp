@@ -14,6 +14,9 @@
 using namespace std;
 const int SIZE = 3;
 
+int getRandomLegs(); // Returns random number of 3 or 4 legs
+double getRandomPrice(); // Returns random price from 100.00 to 999.99
+
 class Chair {
 private:
     int legs;
@@ -86,4 +89,14 @@ int main() {
         collection[i].print();
     
     return 0;
+}
+
+// Returns random number of 3 or 4 legs
+int getRandomLegs(){
+    return rand() % 2 + 3;
+}
+
+// Returns random price from 100.00 to 999.99
+double getRandomPrice(){
+    return (rand() % (99999-10000) + 10000) / 100;
 }
