@@ -35,7 +35,7 @@ public:
     Chair(int l, double *priceArray, int priceArraySize)
     {
         // Modified to accept array of prices and assign to object
-        // Perform a deep copy in case pointer from main deletes array from main
+        // Perform a deep copy in case pointer from main deletes array inside main
         if (priceArraySize == SIZE)
         {
             for (unsigned int i = 0; i < priceArraySize; i++)
@@ -86,6 +86,9 @@ public:
 
 int main()
 {
+    // Price array to pass to parameter constructor
+    double *prices = new double[SIZE];
+ 
     cout << fixed << setprecision(2);
 
     // creating pointer to first chair object
@@ -93,8 +96,12 @@ int main()
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
+    // Delet object from heap and nullify pointer
+    delete chairPtr;
+    chairPtr = nullptr;
 
     // creating dynamic chair object with constructor
+    *prices = {525.25, 434.34, 252.52};
     Chair *livingChair = new Chair(3);
     livingChair->setPrices(525.25, 434.34, 252.52);
     livingChair->print();
