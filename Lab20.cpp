@@ -118,7 +118,9 @@ int main()
     Chair *livingChair = new Chair(3, prices, SIZE); // Because the array has no bounds checking, I included the array size as an argument.
     // livingChair->setPrices(525.25, 434.34, 252.52); // No longer needed
     livingChair->print();
+    // Clean up heap allocations
     delete livingChair;
+    delete[] prices;
     livingChair = nullptr;
 
     // Modify to use default constructors
@@ -127,9 +129,6 @@ int main()
     Chair *collection = new Chair[SIZE];
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
-
-    // Clean up heap allocations
-    delete[] prices;
 
     return 0;
 }
