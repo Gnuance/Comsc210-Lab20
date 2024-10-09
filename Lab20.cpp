@@ -32,11 +32,13 @@ public:
         for (int i = 0; i < SIZE; i++)
             prices[i] = getRandomPrice(); // Modified to add random prices for each array element
     }
+    // I know the assignment said 2 parameters, but because an array has no bounds checking, I included the array size as a parameter.
     Chair(int l, double *priceArray, int priceArraySize)
     {
         // Modified to accept array of prices and assign to object
         // Perform a deep copy in case pointer from main deletes array inside main
-        if (priceArraySize == SIZE)
+        prices = new double[SIZE];
+        if (priceArraySize == SIZE) // Make sure arrays are same size before you try to assign
         {
             for (unsigned int i = 0; i < priceArraySize; i++)
             {
@@ -70,9 +72,9 @@ public:
         cout << "CHAIR DATA - legs: " << legs << endl;
         cout << "Price history: ";
         for (int i = 0; i < SIZE; i++)
-            cout << prices[i] << " ";
+            cout << "$" << prices[i] << " ";
         cout << endl
-             << "Historical avg price: " << getAveragePrices();
+             << "Historical avg price: $" << getAveragePrices();
         cout << endl
              << endl;
     }
@@ -91,6 +93,7 @@ int main()
     cout << fixed << setprecision(2);
 
     // creating pointer to first chair object
+    cout << "> Using default no arg constructor to generate chair object:" << endl;
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
@@ -100,10 +103,11 @@ int main()
     chairPtr = nullptr;
 
     // creating dynamic chair object with constructor
+    cout << "> Using parameter constructor to generate chair object:" << endl;
     prices[0] = 525.25;
     prices[1] = 434.34;
     prices[2] = 252.52;
-    Chair *livingChair = new Chair(3, prices, SIZE);
+    Chair *livingChair = new Chair(3, prices, SIZE); // Because the array has no bounds checking, I included the array size as an argument.
     // livingChair->setPrices(525.25, 434.34, 252.52); // No longer needed
     livingChair->print();
     delete livingChair;
@@ -111,17 +115,12 @@ int main()
 
     // Modify to use default constructors
     // creating dynamic array of chair objects
+    cout << "> Using default constructor to generate chair objects:" << endl;
     Chair *collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
 
-    // Clean up heap
+    // Clean up heap allocations
     delete[] prices;
 
     return 0;
