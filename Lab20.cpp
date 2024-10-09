@@ -34,7 +34,15 @@ public:
     }
     Chair(int l, double *priceArray, int priceArraySize)
     {
-        if (priceArraySize = SIZE) prices = priceArray; // Modified to accept array of prices and assign to object
+        // Modified to accept array of prices and assign to object
+        // Perform a deep copy in case pointer from main deletes array from main
+        if (priceArraySize == SIZE)
+        {
+            for (unsigned int i = 0; i < priceArraySize; i++)
+            {
+                prices[i] = priceArray[i];
+            }
+        }
         legs = l;
     }
 
@@ -67,6 +75,12 @@ public:
              << "Historical avg price: " << getAveragePrices();
         cout << endl
              << endl;
+    }
+
+    // Destructor to deallocate price array on heap
+    ~Chair()
+    {
+        delete[] prices;
     }
 };
 
