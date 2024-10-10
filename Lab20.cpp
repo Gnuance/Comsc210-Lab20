@@ -116,7 +116,6 @@ int main()
     prices[1] = 434.34;
     prices[2] = 252.52;
     Chair *livingChair = new Chair(3, prices, SIZE); // Because the array has no bounds checking, I included the array size as an argument.
-    // livingChair->setPrices(525.25, 434.34, 252.52); // No longer needed
     livingChair->print();
     // Clean up heap allocations
     delete livingChair;
